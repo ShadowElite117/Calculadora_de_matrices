@@ -77,3 +77,10 @@ if n > 0:
                     if op == 2:
                         matrizr[i, j] = matrizr[i, j] + matriz2[i, k] * matriz1[k, j]
         print(matrizr, "\n")
+
+    if m == 4:
+        borrarPantalla()
+        for i in range(n):
+            for j in range(n):
+                matrizr[i, j] = matriz1[j, i]
+        print(matrizr, "\n")
