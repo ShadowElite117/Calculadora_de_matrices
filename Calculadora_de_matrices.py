@@ -29,3 +29,9 @@ if n > 0:
     m = int(input("Introduzca la opción que desea: "))
 
     matrizr = np.zeros((n, n))
+
+    if m == 1:
+        for i in range(n):
+            for j in range(n):
+                matrizr[i, j] = matriz1[i, j] + matriz2[i, j]
+        print(matrizr, "\n")
