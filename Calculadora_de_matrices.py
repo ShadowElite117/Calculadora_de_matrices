@@ -61,3 +61,19 @@ if n > 0:
                 if op == 2:
                     matrizr[i, j] = matriz2[i, j] - matriz1[i, j]
         print(matrizr, "\n")
+
+    if m == 3:
+        borrarPantalla()
+        print("1) Calcular matriz 1 x matriz 2")
+        print("2) Calcular matriz 2 x matriz 1")
+        
+        op = int(input("Introduzca la opción que desea: "))
+
+        for i in range(n):
+            for j in range(n):
+                for k in range(n):
+                    if op == 1:
+                        matrizr[i, j] = matrizr[i, j] + matriz1[i, k] * matriz2[k, j]
+                    if op == 2:
+                        matrizr[i, j] = matrizr[i, j] + matriz2[i, k] * matriz1[k, j]
+        print(matrizr, "\n")
