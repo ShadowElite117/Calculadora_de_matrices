@@ -85,7 +85,7 @@ if n > 0:
                 matrizr[i, j] = matriz1[j, i]
         print(matrizr, "\n")
 
-     if m == 5:
+    if m == 5:
         borrarPantalla()
         for i in range(n):
             for j in range(n):
