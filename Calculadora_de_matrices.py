@@ -91,3 +91,29 @@ if n > 0:
             for j in range(n):
                 matrizr[i, j] = matriz2[j, i]
         print(matrizr, "\n")
+
+    if m == 6:
+        borrarPantalla()
+        menor = matriz1[0, 0]
+        mayor = matriz1[0, 0]
+
+        for i in range(n):
+            for j in range(n):
+                if menor > matriz1[i, j]:
+                    menor = matriz1[i, j]
+                if mayor < matriz1[i, j]:
+                    mayor = matriz1[i, j]
+        print("El número menor es", menor, "y el número mayor es", mayor, "\n")
+
+    if m == 7:
+        borrarPantalla()
+        menor = matriz2[0, 0]
+        mayor = matriz2[0, 0]
+
+        for i in range(n):
+            for j in range(n):
+                if menor > matriz2[i, j]:
+                    menor = matriz2[i, j]
+                if mayor < matriz2[i, j]:
+                    mayor = matriz2[i, j]
+        print("El número menor es", menor, "y el número mayor es", mayor, "\n")
