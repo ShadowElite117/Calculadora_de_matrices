@@ -1,6 +1,15 @@
 import numpy as np
+import os
+
+def borrarPantalla():
+    if os.name == "posix":
+        os.system ("clear")
+    elif os.name == "ce" or os.name == "nt" or os.name == "dos":
+        os.system ("cls")
 
 n = int(input("Introduzca valor de n para las matrices: "))
+
+borrarPantalla()
 
 if n > 0:
     matriz1 = np.zeros((n, n))
@@ -28,15 +37,18 @@ if n > 0:
 
     m = int(input("Introduzca la opción que desea: "))
 
+    borrarPantalla()
     matrizr = np.zeros((n, n))
 
     if m == 1:
+        borrarPantalla()
         for i in range(n):
             for j in range(n):
                 matrizr[i, j] = matriz1[i, j] + matriz2[i, j]
         print(matrizr, "\n")
 
     if m == 2:
+        borrarPantalla()
         print("1) Calcular matriz 1 - matriz 2")
         print("2) Calcular matriz 2 - matriz 1")
 
