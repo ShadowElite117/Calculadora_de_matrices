@@ -35,3 +35,17 @@ if n > 0:
             for j in range(n):
                 matrizr[i, j] = matriz1[i, j] + matriz2[i, j]
         print(matrizr, "\n")
+
+    if m == 2:
+        print("1) Calcular matriz 1 - matriz 2")
+        print("2) Calcular matriz 2 - matriz 1")
+
+        op = int(input("Introduzca la opción que desea: "))
+
+        for i in range(n):
+            for j in range(n):
+                if op == 1:
+                    matrizr[i, j] = matriz1[i, j] - matriz2[i, j]
+                if op == 2:
+                    matrizr[i, j] = matriz2[i, j] - matriz1[i, j]
+        print(matrizr, "\n")
