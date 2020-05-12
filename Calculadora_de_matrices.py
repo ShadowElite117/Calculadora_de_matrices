@@ -84,3 +84,10 @@ if n > 0:
             for j in range(n):
                 matrizr[i, j] = matriz1[j, i]
         print(matrizr, "\n")
+
+     if m == 5:
+        borrarPantalla()
+        for i in range(n):
+            for j in range(n):
+                matrizr[i, j] = matriz2[j, i]
+        print(matrizr, "\n")
