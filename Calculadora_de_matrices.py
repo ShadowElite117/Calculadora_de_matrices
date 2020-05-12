@@ -27,3 +27,5 @@ if n > 0:
     print("8) Salir del programa")
 
     m = int(input("Introduzca la opción que desea: "))
+
+    matrizr = np.zeros((n, n))
