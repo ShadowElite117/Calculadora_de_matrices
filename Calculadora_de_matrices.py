@@ -1,28 +1,28 @@
 import numpy as np
 import os
 
-def suma(n,matriz1,matriz2):
-    matrizr=np.zeros((n,n))
+def suma(n,matriz_1,matriz_2):
+    matriz_respuesta=np.zeros((n,n))
     for i in range(n):
         for j in range(n):
-            matrizr[i,j] = matriz1[i,j] + matriz2[i,j]
-    return(matrizr)
+            matriz_respuesta[i,j] = matriz_1[i,j] + matriz_2[i,j]
+    return(matriz_respuesta)
 
-def resta(n,matriz1,matriz2):
-    matrizr=np.zeros((n,n))
+def resta(n,matriz_1,matriz_2):
+    matriz_respuesta=np.zeros((n,n))
     op=int(input("ingrese la operacion que desee realizar:"))
     if op==1:
         for i in range(n):
             for j in range(n):
-                matrizr[i,j] = matriz1[i,j] - matriz2[i,j]
-        print(matrizr)
+                matriz_respuesta[i,j] = matriz_1[i,j] - matriz_2[i,j]
+        print(matriz_respuesta)
     elif op==2:
         for i in range(n):
             for j in range(n):
-                matrizr[i,j] = matriz2[i,j] - matriz1[i,j]
-        print(matrizr)
+                matriz_respuesta[i,j] = matriz_2[i,j] - matriz_1[i,j]
+        print(matriz_respuesta)
 
-def borrarPantalla():
+def borrar_pantalla():
     if os.name == "posix":
         os.system ("clear")
     elif os.name == "ce" or os.name == "nt" or os.name == "dos":
@@ -33,20 +33,20 @@ def main():
     while m != 8:
         n = int(input("Introduzca valor de n para las matrices: "))
 
-        borrarPantalla()
+        borrar_pantalla()
 
         if n > 0:
-            matriz1 = np.zeros((n, n))
-            matriz2 = np.zeros((n, n))
+            matriz_1 = np.zeros((n, n))
+            matriz_2 = np.zeros((n, n))
             for h in range(2):        
                 for i in range(n):
                     for j in range(n):
                         if h == 0:
-                            matriz1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                            print(matriz1)
+                            matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
+                            print(matriz_1)
                         else:
-                            matriz2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                            print(matriz2)
+                            matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
+                            print(matriz_2)
 
             print("Calculadora de matrices \n", "Menú: \n")
 
@@ -61,23 +61,23 @@ def main():
 
             m = int(input("Introduzca la opción que desea: "))
 
-            borrarPantalla()
-            matrizr = np.zeros((n, n))
+            borrar_pantalla()
+            matriz_respuesta = np.zeros((n, n))
 
             if m == 1:
-                borrarPantalla()
-                suma(n,matriz1,matriz2)
-                print(matrizr, "\n")
+                borrar_pantalla()
+                suma(n,matriz_1,matriz_2)
+                print(matriz_respuesta, "\n")
 
             if m == 2:
-                borrarPantalla()
+                borrar_pantalla()
                 print("1) Calcular matriz 1 - matriz 2")
                 print("2) Calcular matriz 2 - matriz 1")
-                resta(n,matriz1,matriz2)
+                resta(n,matriz_1,matriz_2)
                 
 
             if m == 3:
-                borrarPantalla()
+                borrar_pantalla()
                 print("1) Calcular matriz 1 x matriz 2")
                 print("2) Calcular matriz 2 x matriz 1")
         
@@ -87,49 +87,49 @@ def main():
                     for j in range(n):
                         for k in range(n):
                             if op == 1:
-                                matrizr[i, j] = matrizr[i, j] + matriz1[i, k] * matriz2[k, j]
+                                matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_1[i, k] * matriz_2[k, j]
                             if op == 2:
-                                matrizr[i, j] = matrizr[i, j] + matriz2[i, k] * matriz1[k, j]
-                print(matrizr, "\n")
+                                matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_2[i, k] * matriz_1[k, j]
+                print(matriz_respuesta, "\n")
 
             if m == 4:
-                borrarPantalla()
+                borrar_pantalla()
                 for i in range(n):
                     for j in range(n):
-                        matrizr[i, j] = matriz1[j, i]
-                print(matrizr, "\n")
+                        matriz_respuesta[i, j] = matriz_1[j, i]
+                print(matriz_respuesta, "\n")
 
             if m == 5:
-                borrarPantalla()
+                borrar_pantalla()
                 for i in range(n):
                     for j in range(n):
-                        matrizr[i, j] = matriz2[j, i]
-                print(matrizr, "\n")
+                        matriz_respuesta[i, j] = matriz_2[j, i]
+                print(matriz_respuesta, "\n")
 
             if m == 6:
-                borrarPantalla()
-                menor = matriz1[0, 0]
-                mayor = matriz1[0, 0]
+                borrar_pantalla()
+                menor = matriz_1[0, 0]
+                mayor = matriz_1[0, 0]
 
                 for i in range(n):
                     for j in range(n):
-                        if menor > matriz1[i, j]:
-                            menor = matriz1[i, j]
-                        if mayor < matriz1[i, j]:
-                            mayor = matriz1[i, j]
+                        if menor > matriz_1[i, j]:
+                            menor = matriz_1[i, j]
+                        if mayor < matriz_1[i, j]:
+                            mayor = matriz_1[i, j]
                 print("El número menor es", menor, "y el número mayor es", mayor, "\n")
 
             if m == 7:
-                borrarPantalla()
-                menor = matriz2[0, 0]
-                mayor = matriz2[0, 0]
+                borrar_pantalla()
+                menor = matriz_2[0, 0]
+                mayor = matriz_2[0, 0]
 
                 for i in range(n):
                     for j in range(n):
-                        if menor > matriz2[i, j]:
-                            menor = matriz2[i, j]
-                        if mayor < matriz2[i, j]:
-                            mayor = matriz2[i, j]
+                        if menor > matriz_2[i, j]:
+                            menor = matriz_2[i, j]
+                        if mayor < matriz_2[i, j]:
+                            mayor = matriz_2[i, j]
                 print("El número menor es", menor, "y el número mayor es", mayor, "\n")
 
 main()
