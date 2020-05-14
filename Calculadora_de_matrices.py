@@ -24,6 +24,16 @@ def resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
                 matriz_respuesta[i, j] = matriz_2[i, j] - matriz_1[i, j]
     return matriz_respuesta
 
+def multiplicacion_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                if op == 1:
+                    matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_1[i, k] * matriz_2[k, j]
+                elif op == 2:
+                    matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_2[i, k] * matriz_1[k, j]
+    return matriz_respuesta
+
 def main():
     m = 0
     while m != 8:
@@ -71,20 +81,11 @@ def main():
                 print(resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
 
             if m == 3:
-                borrar_pantalla()
                 print("1) Calcular matriz 1 x matriz 2")
                 print("2) Calcular matriz 2 x matriz 1")
-        
                 op = int(input("Introduzca la opción que desea: "))
 
-                for i in range(n):
-                    for j in range(n):
-                        for k in range(n):
-                            if op == 1:
-                                matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_1[i, k] * matriz_2[k, j]
-                            if op == 2:
-                                matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_2[i, k] * matriz_1[k, j]
-                print(matriz_respuesta, "\n")
+                print(multiplicacion_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
 
             if m == 4:
                 borrar_pantalla()
