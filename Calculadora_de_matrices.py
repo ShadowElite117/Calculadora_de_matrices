@@ -1,6 +1,12 @@
 import numpy as np
 import os
 
+def borrar_pantalla():
+    if os.name == "posix":
+        return os.system ("clear")
+    elif os.name == "ce" or os.name == "nt" or os.name == "dos":
+        return os.system ("cls")
+
 def suma(n,matriz_1,matriz_2):
     matriz_respuesta=np.zeros((n,n))
     for i in range(n):
@@ -21,12 +27,6 @@ def resta(n,matriz_1,matriz_2):
             for j in range(n):
                 matriz_respuesta[i,j] = matriz_2[i,j] - matriz_1[i,j]
         print(matriz_respuesta)
-
-def borrar_pantalla():
-    if os.name == "posix":
-        os.system ("clear")
-    elif os.name == "ce" or os.name == "nt" or os.name == "dos":
-        os.system ("cls")
 
 def main():
     m = 0
