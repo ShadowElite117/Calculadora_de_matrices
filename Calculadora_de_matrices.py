@@ -34,16 +34,10 @@ def multiplicacion_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
                     matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_2[i, k] * matriz_1[k, j]
     return matriz_respuesta
 
-def transpuesta_matriz1(n, matriz_1, matriz_respuesta):
+def transpuesta(n, matriz, matriz_respuesta):
     for i in range(n):
         for j in range(n):
-            matriz_respuesta[i, j] = matriz_1[j, i]
-    return matriz_respuesta
-
-def transpuesta_matriz2(n, matriz_2, matriz_respuesta):
-    for i in range(n):
-        for j in range(n):
-            matriz_respuesta[i, j] = matriz_2[j, i]
+            matriz_respuesta[i, j] = matriz[j, i]
     return matriz_respuesta
 
 def main():
@@ -100,10 +94,10 @@ def main():
                 print(multiplicacion_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
 
             if m == 4:
-                print(transpuesta_matriz1(n, matriz_1, matriz_respuesta), "\n")
+                print(transpuesta(n, matriz_1, matriz_respuesta), "\n")
 
             if m == 5:
-                print(transpuesta_matriz2(n, matriz_2, matriz_respuesta), "\n")
+                print(transpuesta(n, matriz_2, matriz_respuesta), "\n")
 
             if m == 6:
                 borrar_pantalla()
