@@ -14,19 +14,16 @@ def suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta):
             matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
     return(matriz_respuesta)
 
-def resta(n,matriz_1,matriz_2):
-    matriz_respuesta=np.zeros((n,n))
-    op=int(input("ingrese la operacion que desee realizar:"))
-    if op==1:
+def resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
+    if op == 1:
         for i in range(n):
             for j in range(n):
-                matriz_respuesta[i,j] = matriz_1[i,j] - matriz_2[i,j]
-        print(matriz_respuesta)
-    elif op==2:
+                matriz_respuesta[i, j] = matriz_1[i, j] - matriz_2[i, j]
+    elif op == 2:
         for i in range(n):
             for j in range(n):
-                matriz_respuesta[i,j] = matriz_2[i,j] - matriz_1[i,j]
-        print(matriz_respuesta)
+                matriz_respuesta[i, j] = matriz_2[i, j] - matriz_1[i, j]
+    return matriz_respuesta
 
 def main():
     m = 0
@@ -68,11 +65,11 @@ def main():
                 print(suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
 
             if m == 2:
-                borrar_pantalla()
                 print("1) Calcular matriz 1 - matriz 2")
                 print("2) Calcular matriz 2 - matriz 1")
-                resta(n,matriz_1,matriz_2)
-                
+                op = int(input("Ingrese la operacion que desee realizar: "))
+
+                print(resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
 
             if m == 3:
                 borrar_pantalla()
