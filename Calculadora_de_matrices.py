@@ -8,7 +8,6 @@ def borrar_pantalla():
         return os.system ("cls")
 
 def suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta):
-    borrar_pantalla()
     for i in range(n):
         for j in range(n):
             matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
