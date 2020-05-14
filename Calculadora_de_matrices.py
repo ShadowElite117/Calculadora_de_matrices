@@ -7,11 +7,11 @@ def borrar_pantalla():
     elif os.name == "ce" or os.name == "nt" or os.name == "dos":
         return os.system ("cls")
 
-def suma(n,matriz_1,matriz_2):
-    matriz_respuesta=np.zeros((n,n))
+def suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta):
+    borrar_pantalla()
     for i in range(n):
         for j in range(n):
-            matriz_respuesta[i,j] = matriz_1[i,j] + matriz_2[i,j]
+            matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
     return(matriz_respuesta)
 
 def resta(n,matriz_1,matriz_2):
@@ -65,9 +65,7 @@ def main():
             matriz_respuesta = np.zeros((n, n))
 
             if m == 1:
-                borrar_pantalla()
-                suma(n,matriz_1,matriz_2)
-                print(matriz_respuesta, "\n")
+                print(suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
 
             if m == 2:
                 borrar_pantalla()
