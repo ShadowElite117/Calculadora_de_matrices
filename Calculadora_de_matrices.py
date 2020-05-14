@@ -1,6 +1,13 @@
 import numpy as np
 import os
 
+def suma(n,matriz1,matriz2):
+    matrizr=np.zeros((n,n))
+    for i in range(n):
+        for j in range(n):
+            matrizr[i,j] = matriz1[i,j] + matriz2[i,j]
+    return(matrizr)
+
 def borrarPantalla():
     if os.name == "posix":
         os.system ("clear")
@@ -45,9 +52,7 @@ def main():
 
             if m == 1:
                 borrarPantalla()
-                for i in range(n):
-                    for j in range(n):
-                        matrizr[i, j] = matriz1[i, j] + matriz2[i, j]
+                suma(n,matriz1,matriz2)
                 print(matrizr, "\n")
 
             if m == 2:
