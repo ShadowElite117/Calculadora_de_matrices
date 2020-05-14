@@ -8,6 +8,20 @@ def suma(n,matriz1,matriz2):
             matrizr[i,j] = matriz1[i,j] + matriz2[i,j]
     return(matrizr)
 
+def resta(n,matriz1,matriz2):
+    matrizr=np.zeros((n,n))
+    op=int(input("ingrese la operacion que desee realizar:"))
+    if op==1:
+        for i in range(n):
+            for j in range(n):
+                matrizr[i,j] = matriz1[i,j] - matriz2[i,j]
+        print(matrizr)
+    elif op==2:
+        for i in range(n):
+            for j in range(n):
+                matrizr[i,j] = matriz2[i,j] - matriz1[i,j]
+        print(matrizr)
+
 def borrarPantalla():
     if os.name == "posix":
         os.system ("clear")
@@ -59,16 +73,8 @@ def main():
                 borrarPantalla()
                 print("1) Calcular matriz 1 - matriz 2")
                 print("2) Calcular matriz 2 - matriz 1")
-
-                op = int(input("Introduzca la opción que desea: "))
-
-                for i in range(n):
-                    for j in range(n):
-                        if op == 1:
-                            matrizr[i, j] = matriz1[i, j] - matriz2[i, j]
-                        if op == 2:
-                            matrizr[i, j] = matriz2[i, j] - matriz1[i, j]
-                print(matrizr, "\n")
+                resta(n,matriz1,matriz2)
+                
 
             if m == 3:
                 borrarPantalla()
