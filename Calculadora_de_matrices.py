@@ -1,5 +1,7 @@
 import numpy as np
 import os
+import Graficar_matrices
+
 
 def solicitar_entrada_operacion():
 
@@ -120,6 +122,8 @@ def main():
             print("6) Número mayor y menor de la matriz 1")
             print("7) Número mayor y menor de la matriz 2")
             print("8) Salir del programa")
+            print("9) Graficar matrices")
+            
 
             operacion = solicitar_entrada_operacion()
 
@@ -128,6 +132,9 @@ def main():
 
             if operacion == 1:
                 print(suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
+                
+            
+                    
 
             if operacion == 2:
                 print("1) Calcular matriz 1 - matriz 2")
@@ -175,4 +182,7 @@ def main():
                             mayor = matriz_2[i, j]
                 print("El número menor es", menor, "y el número mayor es", mayor, "\n")
 
+            if operacion == 9:    
+                Graficar_matrices.main(n, matriz_1, matriz_2)
+            
 main()
