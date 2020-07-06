@@ -2,18 +2,6 @@ import numpy as np
 import os
 import Graficar_matrices
 
-# Solicita al usuario un entero positivo y lo retorna, en este caso para el tamaño de las
-# matrices. Si el valor solicitado no es un entero positivo, se solicita nuevamente y se genera
-# un mensaje de error.
-def solicitar_entrada_matrices():
-    while True:
-        n = input("Introduzca valor de n para las matrices: ")
-        try:
-            n = int (n)
-            return n
-        except ValueError:
-            print ("Porfavor ingrese un número entero")
-
 # Función para limpiar la consola siempre que sea necesario. Es independiente del S.O.
 def borrar_pantalla():
     if os.name == "posix":
@@ -83,6 +71,29 @@ def opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta):
     if opcion == 8:
         Graficar_matrices.main(n, matriz_1, matriz_2)
 
+def llenar_matrices():
+    while True:
+        try:
+            n = int(input("Introduzca valor de n para las matrices: "))
+        except ValueError:
+            borrar_pantalla()
+            continue
+        else:
+            if n > 0:
+                matriz_1 = np.zeros((n, n))
+                matriz_2 = np.zeros((n, n))
+                for h in range(2):        
+                    for i in range(n):
+                        for j in range(n):
+                            if h == 0:
+                                matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
+                                print(matriz_1)
+                            else:
+                                matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
+                                print(matriz_2)
+
+                return n, matriz_1, matriz_2
+
 # Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
 def suma_matrices(n, matriz_1, matriz_2, matriz_respuesta):
     for i in range(n):
@@ -133,29 +144,12 @@ def numero_menor_mayor(n, matriz, menor, mayor):
 def main():
     operacion = 0
     while operacion != 9:
-
-        n = solicitar_entrada_matrices()
+        n, matriz_1, matriz_2 = llenar_matrices()
+        opcion = menu()
 
         borrar_pantalla()
+        matriz_respuesta = np.zeros((n, n))
 
-        if n > 0:
-            matriz_1 = np.zeros((n, n))
-            matriz_2 = np.zeros((n, n))
-            for h in range(2):        
-                for i in range(n):
-                    for j in range(n):
-                        if h == 0:
-                            matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                            print(matriz_1)
-                        else:
-                            matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                            print(matriz_2)
-
-            opcion = menu()
-
-            borrar_pantalla()
-            matriz_respuesta = np.zeros((n, n))
-
-            opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta)
+        opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta)
 
 main()
