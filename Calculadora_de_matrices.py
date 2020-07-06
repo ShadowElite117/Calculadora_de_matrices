@@ -69,6 +69,16 @@ def transpuesta(n, matriz, matriz_respuesta):
             matriz_respuesta[i, j] = matriz[j, i]
     return matriz_respuesta
 
+def numero_menor_mayor(n, matriz, menor, mayor):
+    for i in range(n):
+        for j in range(n):
+            if menor > matriz[i, j]:
+                menor = matriz[i, j]
+            if mayor < matriz[i, j]:
+                mayor = matriz[i, j]
+
+    return menor, mayor
+
 def main():
     operacion = 0
     while operacion != 8:
@@ -131,32 +141,18 @@ def main():
                 print(transpuesta(n, matriz_2, matriz_respuesta), "\n")
 
             if operacion == 6:
-                borrar_pantalla()
                 menor = matriz_1[0, 0]
                 mayor = matriz_1[0, 0]
 
-                for i in range(n):
-                    for j in range(n):
-                        if menor > matriz_1[i, j]:
-                            menor = matriz_1[i, j]
-                        if mayor < matriz_1[i, j]:
-                            mayor = matriz_1[i, j]
-                print("El número menor es", menor, "y el número mayor es", mayor, "\n")
+                print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_1, menor, mayor)))
 
             if operacion == 7:
-                borrar_pantalla()
                 menor = matriz_2[0, 0]
                 mayor = matriz_2[0, 0]
 
-                for i in range(n):
-                    for j in range(n):
-                        if menor > matriz_2[i, j]:
-                            menor = matriz_2[i, j]
-                        if mayor < matriz_2[i, j]:
-                            mayor = matriz_2[i, j]
-                print("El número menor es", menor, "y el número mayor es", mayor, "\n")
+                print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_2, menor, mayor)))
 
-            if operacion == 9:    
+            if operacion == 9:
                 Graficar_matrices.main(n, matriz_1, matriz_2)
 
 main()
