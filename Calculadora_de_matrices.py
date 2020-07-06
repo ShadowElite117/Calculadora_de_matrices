@@ -44,6 +44,45 @@ def menu():
         else:
             return opcion
 
+def opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta):
+    if opcion == 1:
+        print(suma_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
+
+    if opcion == 2:
+        print("1) Calcular matriz 1 - matriz 2")
+        print("2) Calcular matriz 2 - matriz 1")
+        op = int(input("Ingrese la operacion que desee realizar: "))
+
+        print(resta_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
+
+    if opcion == 3:
+        print("1) Calcular matriz 1 x matriz 2")
+        print("2) Calcular matriz 2 x matriz 1")
+        op = int(input("Introduzca la opción que desea: "))
+
+        print(multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
+
+    if opcion == 4:
+        print(transpuesta(n, matriz_1, matriz_respuesta), "\n")
+
+    if opcion == 5:
+        print(transpuesta(n, matriz_2, matriz_respuesta), "\n")
+
+    if opcion == 6:
+        menor = matriz_1[0, 0]
+        mayor = matriz_1[0, 0]
+
+        print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_1, menor, mayor)))
+
+    if opcion == 7:
+        menor = matriz_2[0, 0]
+        mayor = matriz_2[0, 0]
+
+        print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_2, menor, mayor)))
+
+    if opcion == 8:
+        Graficar_matrices.main(n, matriz_1, matriz_2)
+
 # Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
 def suma_matrices(n, matriz_1, matriz_2, matriz_respuesta):
     for i in range(n):
@@ -112,47 +151,11 @@ def main():
                             matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
                             print(matriz_2)
 
-            operacion = menu()
+            opcion = menu()
 
             borrar_pantalla()
             matriz_respuesta = np.zeros((n, n))
 
-            if operacion == 1:
-                print(suma_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
-
-            if operacion == 2:
-                print("1) Calcular matriz 1 - matriz 2")
-                print("2) Calcular matriz 2 - matriz 1")
-                op = int(input("Ingrese la operacion que desee realizar: "))
-
-                print(resta_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
-
-            if operacion == 3:
-                print("1) Calcular matriz 1 x matriz 2")
-                print("2) Calcular matriz 2 x matriz 1")
-                op = int(input("Introduzca la opción que desea: "))
-
-                print(multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
-
-            if operacion == 4:
-                print(transpuesta(n, matriz_1, matriz_respuesta), "\n")
-
-            if operacion == 5:
-                print(transpuesta(n, matriz_2, matriz_respuesta), "\n")
-
-            if operacion == 6:
-                menor = matriz_1[0, 0]
-                mayor = matriz_1[0, 0]
-
-                print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_1, menor, mayor)))
-
-            if operacion == 7:
-                menor = matriz_2[0, 0]
-                mayor = matriz_2[0, 0]
-
-                print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_2, menor, mayor)))
-
-            if operacion == 8:
-                Graficar_matrices.main(n, matriz_1, matriz_2)
+            opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta)
 
 main()
