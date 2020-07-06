@@ -71,28 +71,34 @@ def opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta):
     if opcion == 8:
         Graficar_matrices.main(n, matriz_1, matriz_2)
 
-def llenar_matrices():
+def dimension_matrices():
     while True:
         try:
             n = int(input("Introduzca valor de n para las matrices: "))
         except ValueError:
             borrar_pantalla()
-            continue
+            print("Por favor introduzca un número entero positivo mayor a cero.")
         else:
             if n > 0:
-                matriz_1 = np.zeros((n, n))
-                matriz_2 = np.zeros((n, n))
-                for h in range(2):        
-                    for i in range(n):
-                        for j in range(n):
-                            if h == 0:
-                                matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                                print(matriz_1)
-                            else:
-                                matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                                print(matriz_2)
+                return n
+            else:
+                print("Por favor introduzca un número entero positivo mayor a cero.")
 
-                return n, matriz_1, matriz_2
+def llenar_matrices(n):
+    matriz_1 = np.zeros((n, n))
+    matriz_2 = np.zeros((n, n))
+
+    for h in range(2):        
+        for i in range(n):
+            for j in range(n):
+                if h == 0:
+                    matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
+                    print(matriz_1)
+                else:
+                    matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
+                    print(matriz_2)
+
+    return matriz_1, matriz_2
 
 # Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
 def suma_matrices(n, matriz_1, matriz_2, matriz_respuesta):
@@ -144,7 +150,8 @@ def numero_menor_mayor(n, matriz, menor, mayor):
 def main():
     operacion = 0
     while operacion != 9:
-        n, matriz_1, matriz_2 = llenar_matrices()
+        n = dimension_matrices()
+        matriz_1, matriz_2 = llenar_matrices(n)
         opcion = menu()
 
         borrar_pantalla()
