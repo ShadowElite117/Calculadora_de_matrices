@@ -81,7 +81,7 @@ def numero_menor_mayor(n, matriz, menor, mayor):
 
 def main():
     operacion = 0
-    while operacion != 8:
+    while operacion != 9:
 
         n = solicitar_entrada_matrices()
 
@@ -109,8 +109,8 @@ def main():
             print("5) Transpuesta de la matriz 2")
             print("6) Número mayor y menor de la matriz 1")
             print("7) Número mayor y menor de la matriz 2")
-            print("8) Salir del programa")
-            print("9) Graficar matrices")
+            print("8) Graficar matrices")
+            print("9) Salir del programa")
 
             operacion = solicitar_entrada_operacion()
 
@@ -152,7 +152,7 @@ def main():
 
                 print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_2, menor, mayor)))
 
-            if operacion == 9:
+            if operacion == 8:
                 Graficar_matrices.main(n, matriz_1, matriz_2)
 
 main()
