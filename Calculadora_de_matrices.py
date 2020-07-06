@@ -33,7 +33,7 @@ def borrar_pantalla():
         return os.system ("cls")
 
 # Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
-def suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta):
+def suma_matrices(n, matriz_1, matriz_2, matriz_respuesta):
     for i in range(n):
         for j in range(n):
             matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
@@ -41,7 +41,7 @@ def suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta):
 
 # Se restan las matrices 1 y 2 ó 2 y 1 dependiendo de la entrada dada por el usuario,
 # y retorna una matriz respuesta, la cual se imprime después.
-def resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
+def resta_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
     if op == 1:
         for i in range(n):
             for j in range(n):
@@ -52,7 +52,7 @@ def resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
                 matriz_respuesta[i, j] = matriz_2[i, j] - matriz_1[i, j]
     return matriz_respuesta
 
-def multiplicacion_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
+def multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
     for i in range(n):
         for j in range(n):
             for k in range(n):
@@ -118,21 +118,21 @@ def main():
             matriz_respuesta = np.zeros((n, n))
 
             if operacion == 1:
-                print(suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
+                print(suma_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
 
             if operacion == 2:
                 print("1) Calcular matriz 1 - matriz 2")
                 print("2) Calcular matriz 2 - matriz 1")
                 op = int(input("Ingrese la operacion que desee realizar: "))
 
-                print(resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
+                print(resta_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
 
             if operacion == 3:
                 print("1) Calcular matriz 1 x matriz 2")
                 print("2) Calcular matriz 2 x matriz 1")
                 op = int(input("Introduzca la opción que desea: "))
 
-                print(multiplicacion_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
+                print(multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
 
             if operacion == 4:
                 print(transpuesta(n, matriz_1, matriz_respuesta), "\n")
