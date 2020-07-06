@@ -2,13 +2,9 @@ import numpy as np
 import os
 import Graficar_matrices
 
-
+# Solicita al usuario un entero y lo retorna, en este caso para la operacion a realizar.
+# Si el valor solicitado no es un entero se solicita nuevamente y se genera un mensaje de error.
 def solicitar_entrada_operacion():
-
-    """ Solicita al usuario un entero y lo retorna, en este caso para la operacion a realizar.
-        Si el valor solicitado no es un entero vuelve a solicitarlo
-        mandando un mensaje. """
-
     while True:
         operacion = input("Introduzca la opción que desea: ")
         try:
@@ -17,12 +13,10 @@ def solicitar_entrada_operacion():
         except ValueError:
             print ("Porfavor ingrese un número válido")
 
+# Solicita al usuario un entero positivo y lo retorna, en este caso para el tamaño de las
+# matrices. Si el valor solicitado no es un entero positivo, se solicita nuevamente y se genera
+# un mensaje de error.
 def solicitar_entrada_matrices():
-
-    """ Solicita al usuario un entero y lo retorna, en este caso para el valor de las matrices.
-        Si el valor solicitado no es un entero vuelve a solicitarlo
-        mandando un mensaje. """
-
     while True:
         n = input("Introduzca valor de n para las matrices: ")
         try:
@@ -31,31 +25,23 @@ def solicitar_entrada_matrices():
         except ValueError:
             print ("Porfavor ingrese un número entero")
 
+# Función para limpiar la consola siempre que sea necesario. Es independiente del S.O.
 def borrar_pantalla():
-
-    """Limpia la consola para tener una mejor apariencia a la hora
-    de realizar operaciones con las matrices"""
-
     if os.name == "posix":
         return os.system ("clear")
     elif os.name == "ce" or os.name == "nt" or os.name == "dos":
         return os.system ("cls")
 
+# Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
 def suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta):
-
-    """suma las matrices 1 y 2 en ese orden, y retorna una matriz respuesta,
-    la cual se imprime después"""
-
     for i in range(n):
         for j in range(n):
             matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
     return matriz_respuesta
 
+# Se restan las matrices 1 y 2 ó 2 y 1 dependiendo de la entrada dada por el usuario,
+# y retorna una matriz respuesta, la cual se imprime después.
 def resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
-
-    """resta las matrices 1 y 2 o 2 y 1 dependiendo de la entrada dada por el usuario,
-     y retorna una matriz respuesta, la cual se imprime después"""
-
     if op == 1:
         for i in range(n):
             for j in range(n):
@@ -67,11 +53,6 @@ def resta_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
     return matriz_respuesta
 
 def multiplicacion_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
-
-    """utiliza el índice de la matriz respuesta que es cero al comienzo, y le suma el resultado dado
-    al multiplicar la matriz 1 y matriz 2 en el orden dado por el usuario, posterior a esto
-    retorna una matriz respuesta con el resultado"""
-
     for i in range(n):
         for j in range(n):
             for k in range(n):
@@ -81,11 +62,8 @@ def multiplicacion_de_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
                     matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_2[i, k] * matriz_1[k, j]
     return matriz_respuesta
 
+# Función para hallar la matriz transpuesta de la matriz seleccionada.
 def transpuesta(n, matriz, matriz_respuesta):
-
-    """realiza la transposición de la matriz 1 o 2 según la opción que el usuario
-    haya digitado"""
-
     for i in range(n):
         for j in range(n):
             matriz_respuesta[i, j] = matriz[j, i]
@@ -123,7 +101,6 @@ def main():
             print("7) Número mayor y menor de la matriz 2")
             print("8) Salir del programa")
             print("9) Graficar matrices")
-            
 
             operacion = solicitar_entrada_operacion()
 
@@ -132,9 +109,6 @@ def main():
 
             if operacion == 1:
                 print(suma_de_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
-                
-            
-                    
 
             if operacion == 2:
                 print("1) Calcular matriz 1 - matriz 2")
@@ -184,5 +158,5 @@ def main():
 
             if operacion == 9:    
                 Graficar_matrices.main(n, matriz_1, matriz_2)
-            
+
 main()
