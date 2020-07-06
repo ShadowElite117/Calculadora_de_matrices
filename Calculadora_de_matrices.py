@@ -2,17 +2,6 @@ import numpy as np
 import os
 import Graficar_matrices
 
-# Solicita al usuario un entero y lo retorna, en este caso para la operacion a realizar.
-# Si el valor solicitado no es un entero se solicita nuevamente y se genera un mensaje de error.
-def solicitar_entrada_operacion():
-    while True:
-        operacion = input("Introduzca la opción que desea: ")
-        try:
-            operacion = int (operacion)
-            return operacion
-        except ValueError:
-            print ("Porfavor ingrese un número válido")
-
 # Solicita al usuario un entero positivo y lo retorna, en este caso para el tamaño de las
 # matrices. Si el valor solicitado no es un entero positivo, se solicita nuevamente y se genera
 # un mensaje de error.
@@ -31,6 +20,29 @@ def borrar_pantalla():
         return os.system ("clear")
     elif os.name == "ce" or os.name == "nt" or os.name == "dos":
         return os.system ("cls")
+
+# Función que imprime el menú y solicita la opción deseada a realizar.
+def menu():
+    while True:
+        print("Calculadora de matrices \n", "Menú: \n")
+
+        print("1) Sumar matriz 1 y matriz 2")
+        print("2) Restar matriz 1 y matriz 2")
+        print("3) Multiplicar matriz 1 y matriz 2")
+        print("4) Transpuesta de la matriz 1")
+        print("5) Transpuesta de la matriz 2")
+        print("6) Número mayor y menor de la matriz 1")
+        print("7) Número mayor y menor de la matriz 2")
+        print("8) Graficar matrices")
+        print("9) Salir del programa")
+
+        try:
+            opcion = int(input("Introduzca la opción que desea: "))
+        except ValueError:
+            borrar_pantalla()
+            print("Por favor ingrese un número válido.")
+        else:
+            return opcion
 
 # Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
 def suma_matrices(n, matriz_1, matriz_2, matriz_respuesta):
@@ -100,19 +112,7 @@ def main():
                             matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
                             print(matriz_2)
 
-            print("Calculadora de matrices \n", "Menú: \n")
-
-            print("1) Sumar matriz 1 y matriz 2")
-            print("2) Restar matriz 1 y matriz 2")
-            print("3) Multiplicar matriz 1 y matriz 2")
-            print("4) Transpuesta de la matriz 1")
-            print("5) Transpuesta de la matriz 2")
-            print("6) Número mayor y menor de la matriz 1")
-            print("7) Número mayor y menor de la matriz 2")
-            print("8) Graficar matrices")
-            print("9) Salir del programa")
-
-            operacion = solicitar_entrada_operacion()
+            operacion = menu()
 
             borrar_pantalla()
             matriz_respuesta = np.zeros((n, n))
