@@ -80,14 +80,14 @@ def dimension_matrices():
             print("Por favor introduzca un número entero positivo mayor a cero.")
         else:
             if n > 0:
-                return n
+                matriz_1 = np.zeros((n, n))
+                matriz_2 = np.zeros((n, n))
+                return n, matriz_1, matriz_2
             else:
+                borrar_pantalla()
                 print("Por favor introduzca un número entero positivo mayor a cero.")
 
-def llenar_matrices(n):
-    matriz_1 = np.zeros((n, n))
-    matriz_2 = np.zeros((n, n))
-
+def llenar_matrices(n, matriz_1, matriz_2):
     for h in range(2):        
         for i in range(n):
             for j in range(n):
@@ -150,8 +150,8 @@ def numero_menor_mayor(n, matriz, menor, mayor):
 def main():
     operacion = 0
     while operacion != 9:
-        n = dimension_matrices()
-        matriz_1, matriz_2 = llenar_matrices(n)
+        n, matriz_1, matriz_2 = dimension_matrices()
+        matriz_1, matriz_2 = llenar_matrices(n, matriz_1, matriz_2)
         opcion = menu()
 
         borrar_pantalla()
