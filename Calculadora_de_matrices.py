@@ -156,10 +156,13 @@ def multiplicacion_matrices(matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
     return matriz_respuesta
 
 # Función para hallar la matriz transpuesta de la matriz seleccionada.
-def transpuesta(n, matriz, matriz_respuesta):
-    for i in range(n):
-        for j in range(n):
+def transpuesta(matriz, dim_matriz):
+    matriz_respuesta = np.zeros((dim_matriz[1], dim_matriz[0]))
+
+    for i in range(dim_matriz[1]):
+        for j in range(dim_matriz[0]):
             matriz_respuesta[i, j] = matriz[j, i]
+
     return matriz_respuesta
 
 def numero_menor_mayor(n, matriz, menor, mayor):
@@ -214,10 +217,10 @@ def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
                 print("de la matriz 2 es diferente al número de filas de la matriz 1.")
 
     if opcion == 4:
-        print(transpuesta(n, matriz_1, matriz_respuesta), "\n")
+        print(transpuesta(matriz_1, dim_matriz_1), "\n")
 
     if opcion == 5:
-        print(transpuesta(n, matriz_2, matriz_respuesta), "\n")
+        print(transpuesta(matriz_2, dim_matriz_2), "\n")
 
     if opcion == 6:
         menor = matriz_1[0, 0]
