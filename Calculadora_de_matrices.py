@@ -136,7 +136,9 @@ def suma_matrices(matriz_1, dim_matriz_1, matriz_2):
 
 # Se restan las matrices 1 y 2 ó 2 y 1 dependiendo de la entrada dada por el usuario,
 # y retorna una matriz respuesta, la cual se imprime después.
-def resta_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
+def resta_matrices(matriz_1, dim_matriz_1, matriz_2, op):
+    matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
+
     if op == 1:
         for i in range(n):
             for j in range(n):
@@ -182,11 +184,14 @@ def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
             print("Las matrices 1 y 2 no se pueden sumar porque sus dimensiones son diferentes.")
 
     if opcion == 2:
-        print("1) Calcular matriz 1 - matriz 2")
-        print("2) Calcular matriz 2 - matriz 1")
-        op = int(input("Ingrese la operacion que desee realizar: "))
+        if dim_matriz_1 == dim_matriz_2:
+            print("1) Calcular matriz 1 - matriz 2")
+            print("2) Calcular matriz 2 - matriz 1")
+            op = int(input("Ingrese la operacion que desee realizar: \n"))
 
-        print(resta_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
+            print(resta_matrices(matriz_1, dim_matriz_1, matriz_2, op), "\n")
+        else:
+            print("Las matrices 1 y 2 no se pueden restar porque sus dimensiones son diferentes.")
 
     if opcion == 3:
         print("1) Calcular matriz 1 x matriz 2")
