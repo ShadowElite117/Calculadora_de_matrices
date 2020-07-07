@@ -136,17 +136,13 @@ def suma_matrices(matriz_1, dim_matriz_1, matriz_2):
 
 # Se restan las matrices 1 y 2 ó 2 y 1 dependiendo de la entrada dada por el usuario,
 # y retorna una matriz respuesta, la cual se imprime después.
-def resta_matrices(matriz_1, dim_matriz_1, matriz_2, op):
+def resta_matrices(matriz_1, dim_matriz_1, matriz_2):
     matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
 
-    if op == 1:
-        for i in range(n):
-            for j in range(n):
-                matriz_respuesta[i, j] = matriz_1[i, j] - matriz_2[i, j]
-    elif op == 2:
-        for i in range(n):
-            for j in range(n):
-                matriz_respuesta[i, j] = matriz_2[i, j] - matriz_1[i, j]
+    for i in range(dim_matriz_1[0]):
+        for j in range(dim_matriz_1[0]):
+            matriz_respuesta[i, j] = matriz_1[i, j] - matriz_2[i, j]
+
     return matriz_respuesta
 
 def multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
@@ -184,14 +180,20 @@ def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
             print("Las matrices 1 y 2 no se pueden sumar porque sus dimensiones son diferentes.")
 
     if opcion == 2:
-        if dim_matriz_1 == dim_matriz_2:
-            print("1) Calcular matriz 1 - matriz 2")
-            print("2) Calcular matriz 2 - matriz 1")
-            op = int(input("Ingrese la operacion que desee realizar: \n"))
+        print("1) Calcular matriz 1 - matriz 2")
+        print("2) Calcular matriz 2 - matriz 1")
+        op = int(input("Ingrese la operacion que desee realizar: "))
 
-            print(resta_matrices(matriz_1, dim_matriz_1, matriz_2, op), "\n")
+        if op == 1:
+            if dim_matriz_1 == dim_matriz_2:
+                print(resta_matrices(matriz_1, dim_matriz_1, matriz_2), "\n")
+            else:
+                print("Las matrices 1 y 2 no se pueden restar porque sus dimensiones son diferentes.")
         else:
-            print("Las matrices 1 y 2 no se pueden restar porque sus dimensiones son diferentes.")
+            if dim_matriz_1 == dim_matriz_2:
+                print(resta_matrices(matriz_2, dim_matriz_1, matriz_1), "\n")
+            else:
+                print("Las matrices 2 y 1 no se pueden restar porque sus dimensiones son diferentes.")
 
     if opcion == 3:
         print("1) Calcular matriz 1 x matriz 2")
