@@ -171,7 +171,7 @@ def numero_menor_mayor(n, matriz, menor, mayor):
 
     return menor, mayor
 
-def opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta):
+def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
     if opcion == 1:
         print(suma_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
 
@@ -224,6 +224,6 @@ def main():
 
         borrar_pantalla()
 
-        # opciones_menu(opcion, matriz_1, matriz_2, matriz_respuesta)
+        opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2)
 
 main()
