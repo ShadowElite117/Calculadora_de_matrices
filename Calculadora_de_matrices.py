@@ -2,6 +2,12 @@ import numpy as np
 import os
 import Graficar_matrices
 
+class Error(Exception):
+    pass
+
+class DimensionNoEsMayorACero(Error):
+    pass
+
 # Función para limpiar la consola siempre que sea necesario. Es independiente del S.O.
 def borrar_pantalla():
     if os.name == "posix":
@@ -71,42 +77,91 @@ def opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta):
     if opcion == 8:
         Graficar_matrices.main(n, matriz_1, matriz_2)
 
-def dimension_matrices():
+def dimensiones_matriz_1():
+    dim_matriz_1 = [0, 0]
+
     while True:
         try:
-            n = int(input("Introduzca valor de n para las matrices: "))
+            dim_matriz_1[0] = int(input("Introduzca valor de filas (i) para la matriz 1: "))
+            if dim_matriz_1[0] <= 0:
+                raise DimensionNoEsMayorACero
         except ValueError:
             borrar_pantalla()
             print("Por favor introduzca un número entero positivo mayor a cero.")
+        except DimensionNoEsMayorACero:
+            borrar_pantalla()
+            print("Por favor introduzca un número entero positivo mayor a cero.")
         else:
-            if n > 0:
-                matriz_1 = np.zeros((n, n))
-                matriz_2 = np.zeros((n, n))
-                return n, matriz_1, matriz_2
-            else:
-                borrar_pantalla()
-                print("Por favor introduzca un número entero positivo mayor a cero.")
+            while True:
+                try:
+                    dim_matriz_1[1] = int(input("Introduzca valor de filas (j) para la matriz 1: "))
+                    if dim_matriz_1[1] <= 0:
+                        raise DimensionNoEsMayorACero
+                except ValueError:
+                    borrar_pantalla()
+                    print("Por favor introduzca un número entero positivo mayor a cero.")
+                except DimensionNoEsMayorACero:
+                    borrar_pantalla()
+                    print("Por favor introduzca un número entero positivo mayor a cero.")
+                else:
+                    break
 
-def llenar_matrices(n, matriz_1, matriz_2):
-    for h in range(2):        
-        for i in range(n):
-            for j in range(n):
-                while True:
-                    try:
-                        if h == 0:
-                            matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                        else:
-                            matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                    except ValueError:
-                        continue
-                    else:
-                        if h == 0:
-                            print(matriz_1)
-                        else:
-                            print(matriz_2)
-                        break
+            break
+
+    return dim_matriz_1
+
+def dimensiones_matriz_2():
+    dim_matriz_2 = [0, 0]
+
+    while True:
+        try:
+            dim_matriz_2[0] = int(input("Introduzca valor de filas (i) para la matriz 2: "))
+            if dim_matriz_2[0] <= 0:
+                raise DimensionNoEsMayorACero
+        except ValueError:
+            borrar_pantalla()
+            print("Por favor introduzca un número entero positivo mayor a cero.")
+        except DimensionNoEsMayorACero:
+            borrar_pantalla()
+            print("Por favor introduzca un número entero positivo mayor a cero.")
+        else:
+            while True:
+                try:
+                    dim_matriz_2[1] = int(input("Introduzca valor de filas (j) para la matriz 2: "))
+                    if dim_matriz_2[1] <= 0:
+                        raise DimensionNoEsMayorACero
+                except ValueError:
+                    borrar_pantalla()
+                    print("Por favor introduzca un número entero positivo mayor a cero.")
+                except DimensionNoEsMayorACero:
+                    borrar_pantalla()
+                    print("Por favor introduzca un número entero positivo mayor a cero.")
+                else:
+                    break
+
+            break
+
+    return dim_matriz_2
+
+def crear_matrices(dim_matriz_1, dim_matriz_2):
+    matriz_1 = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
+    matriz_2 = np.zeros((dim_matriz_2[0], dim_matriz_2[1]))
 
     return matriz_1, matriz_2
+
+def llenar_matriz(dim_matriz, matriz):     
+    for i in range(dim_matriz[0]):
+        for j in range(dim_matriz[1]):
+            while True:
+                try:
+                    matriz[i, j] = float(input(f"Introduzca valor de la casilla ({i + 1}, {j + 1}) para la matriz: "))
+                except ValueError:
+                    continue
+                else:
+                    print(matriz)
+                    break
+
+    return matriz
 
 # Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
 def suma_matrices(n, matriz_1, matriz_2, matriz_respuesta):
@@ -158,13 +213,18 @@ def numero_menor_mayor(n, matriz, menor, mayor):
 def main():
     operacion = 0
     while operacion != 9:
-        n, matriz_1, matriz_2 = dimension_matrices()
-        matriz_1, matriz_2 = llenar_matrices(n, matriz_1, matriz_2)
+        dim_matriz_1 = dimensiones_matriz_1()
+        print(dim_matriz_1)
+        dim_matriz_2 = dimensiones_matriz_2()
+        print(dim_matriz_2)
+        matriz_1, matriz_2 = crear_matrices(dim_matriz_1, dim_matriz_2)
+        matriz_1 = llenar_matriz(dim_matriz_1, matriz_1)
+        matriz_2 = llenar_matriz(dim_matriz_2, matriz_2)
         opcion = menu()
 
         borrar_pantalla()
-        matriz_respuesta = np.zeros((n, n))
+        # matriz_respuesta = np.zeros((n, n))
 
-        opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta)
+        # opciones_menu(opcion, matriz_1, matriz_2, matriz_respuesta)
 
 main()
