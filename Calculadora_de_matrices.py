@@ -145,14 +145,14 @@ def resta_matrices(matriz_1, dim_matriz_1, matriz_2):
 
     return matriz_respuesta
 
-def multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
-    for i in range(n):
-        for j in range(n):
-            for k in range(n):
-                if op == 1:
+def multiplicacion_matrices(matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
+    matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_2[1]))
+
+    for i in range(dim_matriz_1[0]):
+        for j in range(dim_matriz_2[1]):
+            for k in range(dim_matriz_1[1]):
                     matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_1[i, k] * matriz_2[k, j]
-                elif op == 2:
-                    matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_2[i, k] * matriz_1[k, j]
+
     return matriz_respuesta
 
 # Función para hallar la matriz transpuesta de la matriz seleccionada.
@@ -200,7 +200,18 @@ def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
         print("2) Calcular matriz 2 x matriz 1")
         op = int(input("Introduzca la opción que desea: "))
 
-        print(multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
+        if op == 1:
+            if dim_matriz_1[1] == dim_matriz_2[0]:
+                print(multiplicacion_matrices(matriz_1, dim_matriz_1, matriz_2, dim_matriz_2), "\n")
+            else:
+                print("Las matrices 1 y 2 no se pueden multiplicar porque el número de columnas")
+                print("de la matriz 1 es diferente al número de filas de la matriz 2.")
+        else:
+            if dim_matriz_2[1] == dim_matriz_1[0]:
+                print(multiplicacion_matrices(matriz_2, dim_matriz_2, matriz_1, dim_matriz_1), "\n")
+            else:
+                print("Las matrices 2 y 1 no se pueden multiplicar porque el número de columnas")
+                print("de la matriz 2 es diferente al número de filas de la matriz 1.")
 
     if opcion == 4:
         print(transpuesta(n, matriz_1, matriz_respuesta), "\n")
