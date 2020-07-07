@@ -91,12 +91,20 @@ def llenar_matrices(n, matriz_1, matriz_2):
     for h in range(2):        
         for i in range(n):
             for j in range(n):
-                if h == 0:
-                    matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                    print(matriz_1)
-                else:
-                    matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                    print(matriz_2)
+                while True:
+                    try:
+                        if h == 0:
+                            matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
+                        else:
+                            matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
+                    except ValueError:
+                        continue
+                    else:
+                        if h == 0:
+                            print(matriz_1)
+                        else:
+                            print(matriz_2)
+                        break
 
     return matriz_1, matriz_2
 
