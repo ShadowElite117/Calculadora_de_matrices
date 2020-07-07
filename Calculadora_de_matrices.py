@@ -2,6 +2,7 @@ import numpy as np
 import os
 import Graficar_matrices
 
+<<<<<<< HEAD
 def Crear_contrasenia(user):
     def numero_primo(numero):
         if numero == 1:
@@ -200,6 +201,13 @@ def entrada_usuario():
         solicitar_entrada_usuario()
 
 entrada_usuario()
+=======
+class Error(Exception):
+    pass
+
+class DimensionNoEsMayorACero(Error):
+    pass
+>>>>>>> 2b348c46bdf40b53e708fa41f6b1841be3eedc36
 
 # Función para limpiar la consola siempre que sea necesario. Es independiente del S.O.
 def borrar_pantalla():
@@ -231,29 +239,189 @@ def menu():
         else:
             return opcion
 
-def opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta):
+def dimensiones_matriz_1():
+    dim_matriz_1 = [0, 0]
+
+    while True:
+        try:
+            dim_matriz_1[0] = int(input("Introduzca valor de filas (i) para la matriz 1: "))
+            if dim_matriz_1[0] <= 0:
+                raise DimensionNoEsMayorACero
+        except ValueError:
+            borrar_pantalla()
+            print("Por favor introduzca un número entero positivo mayor a cero.")
+        except DimensionNoEsMayorACero:
+            borrar_pantalla()
+            print("Por favor introduzca un número entero positivo mayor a cero.")
+        else:
+            while True:
+                try:
+                    dim_matriz_1[1] = int(input("Introduzca valor de filas (j) para la matriz 1: "))
+                    if dim_matriz_1[1] <= 0:
+                        raise DimensionNoEsMayorACero
+                except ValueError:
+                    borrar_pantalla()
+                    print("Por favor introduzca un número entero positivo mayor a cero.")
+                except DimensionNoEsMayorACero:
+                    borrar_pantalla()
+                    print("Por favor introduzca un número entero positivo mayor a cero.")
+                else:
+                    break
+
+            break
+
+    return dim_matriz_1
+
+def dimensiones_matriz_2():
+    dim_matriz_2 = [0, 0]
+
+    while True:
+        try:
+            dim_matriz_2[0] = int(input("Introduzca valor de filas (i) para la matriz 2: "))
+            if dim_matriz_2[0] <= 0:
+                raise DimensionNoEsMayorACero
+        except ValueError:
+            borrar_pantalla()
+            print("Por favor introduzca un número entero positivo mayor a cero.")
+        except DimensionNoEsMayorACero:
+            borrar_pantalla()
+            print("Por favor introduzca un número entero positivo mayor a cero.")
+        else:
+            while True:
+                try:
+                    dim_matriz_2[1] = int(input("Introduzca valor de filas (j) para la matriz 2: "))
+                    if dim_matriz_2[1] <= 0:
+                        raise DimensionNoEsMayorACero
+                except ValueError:
+                    borrar_pantalla()
+                    print("Por favor introduzca un número entero positivo mayor a cero.")
+                except DimensionNoEsMayorACero:
+                    borrar_pantalla()
+                    print("Por favor introduzca un número entero positivo mayor a cero.")
+                else:
+                    break
+
+            break
+
+    return dim_matriz_2
+
+def crear_matrices(dim_matriz_1, dim_matriz_2):
+    matriz_1 = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
+    matriz_2 = np.zeros((dim_matriz_2[0], dim_matriz_2[1]))
+
+    return matriz_1, matriz_2
+
+def llenar_matriz(dim_matriz, matriz):     
+    for i in range(dim_matriz[0]):
+        for j in range(dim_matriz[1]):
+            while True:
+                try:
+                    matriz[i, j] = float(input(f"Introduzca valor de la casilla ({i + 1}, {j + 1}) para la matriz: "))
+                except ValueError:
+                    continue
+                else:
+                    print(matriz)
+                    break
+
+    return matriz
+
+# Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
+def suma_matrices(matriz_1, dim_matriz_1, matriz_2):
+    matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
+
+    for i in range(dim_matriz_1[0]):
+        for j in range(dim_matriz_1[0]):
+                matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
+
+    return matriz_respuesta
+
+# Se restan las matrices 1 y 2 ó 2 y 1 dependiendo de la entrada dada por el usuario,
+# y retorna una matriz respuesta, la cual se imprime después.
+def resta_matrices(matriz_1, dim_matriz_1, matriz_2):
+    matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
+
+    for i in range(dim_matriz_1[0]):
+        for j in range(dim_matriz_1[0]):
+            matriz_respuesta[i, j] = matriz_1[i, j] - matriz_2[i, j]
+
+    return matriz_respuesta
+
+def multiplicacion_matrices(matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
+    matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_2[1]))
+
+    for i in range(dim_matriz_1[0]):
+        for j in range(dim_matriz_2[1]):
+            for k in range(dim_matriz_1[1]):
+                    matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_1[i, k] * matriz_2[k, j]
+
+    return matriz_respuesta
+
+# Función para hallar la matriz transpuesta de la matriz seleccionada.
+def transpuesta(matriz, dim_matriz):
+    matriz_respuesta = np.zeros((dim_matriz[1], dim_matriz[0]))
+
+    for i in range(dim_matriz[1]):
+        for j in range(dim_matriz[0]):
+            matriz_respuesta[i, j] = matriz[j, i]
+
+    return matriz_respuesta
+
+def numero_menor_mayor(n, matriz, menor, mayor):
+    for i in range(n):
+        for j in range(n):
+            if menor > matriz[i, j]:
+                menor = matriz[i, j]
+            if mayor < matriz[i, j]:
+                mayor = matriz[i, j]
+
+    return menor, mayor
+
+def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
     if opcion == 1:
-        print(suma_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
+        if dim_matriz_1 == dim_matriz_2:
+            print(suma_matrices(matriz_1, dim_matriz_1, matriz_2), "\n")
+        else:
+            print("Las matrices 1 y 2 no se pueden sumar porque sus dimensiones son diferentes.")
 
     if opcion == 2:
         print("1) Calcular matriz 1 - matriz 2")
         print("2) Calcular matriz 2 - matriz 1")
         op = int(input("Ingrese la operacion que desee realizar: "))
 
-        print(resta_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
+        if op == 1:
+            if dim_matriz_1 == dim_matriz_2:
+                print(resta_matrices(matriz_1, dim_matriz_1, matriz_2), "\n")
+            else:
+                print("Las matrices 1 y 2 no se pueden restar porque sus dimensiones son diferentes.")
+        else:
+            if dim_matriz_1 == dim_matriz_2:
+                print(resta_matrices(matriz_2, dim_matriz_1, matriz_1), "\n")
+            else:
+                print("Las matrices 2 y 1 no se pueden restar porque sus dimensiones son diferentes.")
 
     if opcion == 3:
         print("1) Calcular matriz 1 x matriz 2")
         print("2) Calcular matriz 2 x matriz 1")
         op = int(input("Introduzca la opción que desea: "))
 
-        print(multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op), "\n")
+        if op == 1:
+            if dim_matriz_1[1] == dim_matriz_2[0]:
+                print(multiplicacion_matrices(matriz_1, dim_matriz_1, matriz_2, dim_matriz_2), "\n")
+            else:
+                print("Las matrices 1 y 2 no se pueden multiplicar porque el número de columnas")
+                print("de la matriz 1 es diferente al número de filas de la matriz 2.")
+        else:
+            if dim_matriz_2[1] == dim_matriz_1[0]:
+                print(multiplicacion_matrices(matriz_2, dim_matriz_2, matriz_1, dim_matriz_1), "\n")
+            else:
+                print("Las matrices 2 y 1 no se pueden multiplicar porque el número de columnas")
+                print("de la matriz 2 es diferente al número de filas de la matriz 1.")
 
     if opcion == 4:
-        print(transpuesta(n, matriz_1, matriz_respuesta), "\n")
+        print(transpuesta(matriz_1, dim_matriz_1), "\n")
 
     if opcion == 5:
-        print(transpuesta(n, matriz_2, matriz_respuesta), "\n")
+        print(transpuesta(matriz_2, dim_matriz_2), "\n")
 
     if opcion == 6:
         menor = matriz_1[0, 0]
@@ -270,101 +438,21 @@ def opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta):
     if opcion == 8:
         Graficar_matrices.main(n, matriz_1, matriz_2)
 
-def dimension_matrices():
-    while True:
-        try:
-            n = int(input("Introduzca valor de n para las matrices: "))
-        except ValueError:
-            borrar_pantalla()
-            print("Por favor introduzca un número entero positivo mayor a cero.")
-        else:
-            if n > 0:
-                matriz_1 = np.zeros((n, n))
-                matriz_2 = np.zeros((n, n))
-                return n, matriz_1, matriz_2
-            else:
-                borrar_pantalla()
-                print("Por favor introduzca un número entero positivo mayor a cero.")
-
-def llenar_matrices(n, matriz_1, matriz_2):
-    for h in range(2):        
-        for i in range(n):
-            for j in range(n):
-                while True:
-                    try:
-                        if h == 0:
-                            matriz_1[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                        else:
-                            matriz_2[i, j] = float(input(f"Introduzca valor de la casilla {i + 1}, {j + 1} para la matriz {h + 1}: "))
-                    except ValueError:
-                        continue
-                    else:
-                        if h == 0:
-                            print(matriz_1)
-                        else:
-                            print(matriz_2)
-                        break
-
-    return matriz_1, matriz_2
-
-# Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
-def suma_matrices(n, matriz_1, matriz_2, matriz_respuesta):
-    for i in range(n):
-        for j in range(n):
-            matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
-    return matriz_respuesta
-
-# Se restan las matrices 1 y 2 ó 2 y 1 dependiendo de la entrada dada por el usuario,
-# y retorna una matriz respuesta, la cual se imprime después.
-def resta_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
-    if op == 1:
-        for i in range(n):
-            for j in range(n):
-                matriz_respuesta[i, j] = matriz_1[i, j] - matriz_2[i, j]
-    elif op == 2:
-        for i in range(n):
-            for j in range(n):
-                matriz_respuesta[i, j] = matriz_2[i, j] - matriz_1[i, j]
-    return matriz_respuesta
-
-def multiplicacion_matrices(n, matriz_1, matriz_2, matriz_respuesta, op):
-    for i in range(n):
-        for j in range(n):
-            for k in range(n):
-                if op == 1:
-                    matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_1[i, k] * matriz_2[k, j]
-                elif op == 2:
-                    matriz_respuesta[i, j] = matriz_respuesta[i, j] + matriz_2[i, k] * matriz_1[k, j]
-    return matriz_respuesta
-
-# Función para hallar la matriz transpuesta de la matriz seleccionada.
-def transpuesta(n, matriz, matriz_respuesta):
-    for i in range(n):
-        for j in range(n):
-            matriz_respuesta[i, j] = matriz[j, i]
-    return matriz_respuesta
-
-def numero_menor_mayor(n, matriz, menor, mayor):
-    for i in range(n):
-        for j in range(n):
-            if menor > matriz[i, j]:
-                menor = matriz[i, j]
-            if mayor < matriz[i, j]:
-                mayor = matriz[i, j]
-
-    return menor, mayor
-
 def main():
     operacion = 0
     while operacion != 9:
-        n, matriz_1, matriz_2 = dimension_matrices()
-        matriz_1, matriz_2 = llenar_matrices(n, matriz_1, matriz_2)
+        dim_matriz_1 = dimensiones_matriz_1()
+        print(dim_matriz_1)
+        dim_matriz_2 = dimensiones_matriz_2()
+        print(dim_matriz_2)
+        matriz_1, matriz_2 = crear_matrices(dim_matriz_1, dim_matriz_2)
+        matriz_1 = llenar_matriz(dim_matriz_1, matriz_1)
+        matriz_2 = llenar_matriz(dim_matriz_2, matriz_2)
         opcion = menu()
 
         borrar_pantalla()
-        matriz_respuesta = np.zeros((n, n))
 
-        opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta)
+        opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2)
 
 main()
 
