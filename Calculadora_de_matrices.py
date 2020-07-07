@@ -25,8 +25,8 @@ def menu():
         print("3) Multiplicar matriz 1 y matriz 2")
         print("4) Transpuesta de la matriz 1")
         print("5) Transpuesta de la matriz 2")
-        print("6) Número mayor y menor de la matriz 1")
-        print("7) Número mayor y menor de la matriz 2")
+        print("6) Número menor y mayor de la matriz 1")
+        print("7) Número menor y mayor de la matriz 2")
         print("8) Graficar matrices")
         print("9) Salir del programa")
 
@@ -165,9 +165,9 @@ def transpuesta(matriz, dim_matriz):
 
     return matriz_respuesta
 
-def numero_menor_mayor(n, matriz, menor, mayor):
-    for i in range(n):
-        for j in range(n):
+def numero_menor_mayor(matriz, dim_matriz, menor, mayor):
+    for i in range(dim_matriz[0]):
+        for j in range(dim_matriz[1]):
             if menor > matriz[i, j]:
                 menor = matriz[i, j]
             if mayor < matriz[i, j]:
@@ -226,16 +226,18 @@ def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
         menor = matriz_1[0, 0]
         mayor = matriz_1[0, 0]
 
-        print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_1, menor, mayor)))
+        menor, mayor = numero_menor_mayor(matriz_1, dim_matriz_1, menor, mayor)
+        print("El número menor es " + str(menor) + " y el número mayor es " + str(mayor) + "\n")
 
     if opcion == 7:
         menor = matriz_2[0, 0]
         mayor = matriz_2[0, 0]
 
-        print("El número menor es %d y el número mayor es %d \n" %(numero_menor_mayor(n, matriz_2, menor, mayor)))
+        menor, mayor = numero_menor_mayor(matriz_2, dim_matriz_2, menor, mayor)
+        print("El número menor es " + str(menor) + " y el número mayor es " + str(mayor) + "\n")
 
     if opcion == 8:
-        Graficar_matrices.main(n, matriz_1, matriz_2)
+        # Graficar_matrices.main(n, matriz_1, matriz_2)
 
 def main():
     operacion = 0
