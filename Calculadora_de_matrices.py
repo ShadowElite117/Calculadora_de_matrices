@@ -2,6 +2,205 @@ import numpy as np
 import os
 import Graficar_matrices
 
+def Crear_contrasenia(user):
+    def numero_primo(numero):
+        if numero == 1:
+            primo = 0
+        elif numero == 2:
+            primo = 1
+        elif numero % 2 == 0:
+            primo = 0
+        else:
+            i = 3
+            primo = 1
+        while i < numero:
+            if numero % i == 0:
+                primo = 0
+                break
+            else:
+                i = i + 2
+        return primo
+
+    def cadena_a_lista(cadena):
+        return cadena.split()
+
+    def eliminar_signos(lista_palabras, num_palabras):
+        for i in range(num_palabras):
+            longitud_palabra = len(lista_palabras[i])
+            palabra = ""
+            for j in range(longitud_palabra):
+                cod_ASCII = ord(lista_palabras[i][j])
+                if (cod_ASCII >= 65 and cod_ASCII <= 90) or (cod_ASCII >= 97 and cod_ASCII <= 122):
+                    palabra += lista_palabras[i][j]
+            lista_palabras[i] = palabra
+        return lista_palabras
+
+    def peso_palabra(palabra, semilla):
+        peso = 0
+        longitud_palabra = len(palabra)
+        for i in range(longitud_palabra):
+            peso += (ord(palabra[i]) * (i + 1)) % semilla
+        return peso
+
+    def calcular_checksum(lista_palabras, num_palabras, semilla, limite):
+        checksum = 0
+        for i in range(num_palabras):
+            peso = peso_palabra(lista_palabras[i], semilla)
+            checksum = (checksum + peso) * semilla
+        if checksum > limite:
+            checksum = checksum % limite
+        return checksum
+
+    def Crear(cadena):
+        semilla = 1151
+        limite = 12709007
+        if numero_primo(semilla):
+            lista_palabras = cadena_a_lista(cadena)
+            lista_palabras = eliminar_signos(lista_palabras, len(lista_palabras))
+            num_palabras = len(lista_palabras)
+            return (calcular_checksum(lista_palabras, num_palabras, semilla, limite))
+
+
+    creada = str(Crear(user))
+    return creada
+
+def solicitar_entrada_usuario():
+
+    while True:
+        opc = input("Ingrese la opción que desea realizar\n")
+        try:
+            opc = int (opc)
+            return opc
+        except ValueError:
+            print ("Por favor ingrese un número entero\n")
+
+def verificar_entrada():
+
+    while True:
+        opcion = input("Ingrese la opción que desea realizar\n")
+        try:
+            opcion = int (opcion)
+            return opcion
+        except ValueError:
+            print ("Por favor ingrese un número entero\n")
+
+def historial():
+
+    while True:
+        mostrar = input("Ingrese la opción que desea realizar\n")
+        try:
+            mostrar = str (mostrar)
+            return mostrar
+        except ValueError:
+            print ("Por favor ingrese 'Si' o 'No'\n")
+
+def imprimir_registro(user):
+    f = open("user.txt","r")
+    text = f.read()
+    print(text)
+    f.close()
+
+def verificar_contrasenia(user, registro_contra):
+    print ("Escriba su contraseña\n")
+    contrasenia = input()
+    if registro_contra == contrasenia:
+        print ("¿Quiere ver el historial? (Si/No)")
+
+        mostrar = historial()
+
+        if mostrar == 'Si' or mostrar == 'si' or mostrar == 'SI':
+            imprimir_registro(user)
+            main()
+        elif mostrar == 'No' or mostrar == 'no' or mostrar == 'NO':
+            main()
+        else:
+            print ("Elija una de las opciones disponibles\n")
+            verificar_contrasenia
+
+def compr_usuario():
+
+    while True:
+        mostrar = input()
+        try:
+            mostrar = str (mostrar)
+            return mostrar
+        except ValueError:
+            print ("Por favor ingrese una entrada válida")
+
+
+def adicionar_registro(usuar, matriz_1, matriz_2, matriz_respuesta):
+    f = open(usuar + ".txt","a+")
+    f.write(matriz_1)
+    f.write(matriz_2)
+    f.write(matriz_respuesta)
+    f.close()
+
+def registrar_usuario(registro_contrasenia):
+    print ("Escriba un nombre para su usuario")
+
+    user = compr_usuario()
+
+    if user in registro_contrasenia:
+        print ("Escribe otro nombre de usuario")
+        registrar_usuario(registro_contrasenia)
+    else:
+        print ("Esta es su contraseña:")
+        creada = Crear_contrasenia(user)
+        print (creada)
+        print ("Su cuenta ha sido creada con éxito")
+        registro_contrasenia[user] = creada
+        adicionar_registro(user, '', '', '')
+        llave = list(registro_contrasenia)
+    registro = open("data.dat","w")
+    registro.write(llave[0])
+    registro.write(":")
+    registro.write(creada)
+    registro.close
+
+def comprobar_usuario(registro_contrasenia):
+    
+    print ("Escriba su nombre de usuario")
+    usuario = input()
+    if usuario in registro_contrasenia:
+        verificar_contrasenia(usuario, registro_contrasenia)
+    else:
+        print ("1) Escribir de nuevo el usuario")
+        print ("2) Registrarse")
+
+        opccion = verificar_entrada()
+
+        if opccion == 1:
+            comprobar_usuario(registro_contrasenia)
+        
+        elif opccion == 2:
+            registrar_usuario(registro_contrasenia)
+        else:
+            print ("Elija una de las opciones disponibles")
+            comprobar_usuario(registro_contrasenia)
+
+
+def entrada_usuario():
+    """Solo funciona para registrarse, esto se da correctamente, la opcion de logearse no funciona"""
+    print ("1) Iniciar sesión")
+    print ("2) Registrarse")
+
+    opc = solicitar_entrada_usuario()
+
+    if opc == 1:
+        registro_contrasenia = {}
+        registro = open("data.dat","r")
+        comprobar_usuario(registro_contrasenia)
+    
+    elif opc == 2:
+        registro_contrasenia = {}
+        registrar_usuario(registro_contrasenia)
+    
+    else:
+        print ("Elija una de las opciones disponibles")
+        solicitar_entrada_usuario()
+
+entrada_usuario()
+
 # Función para limpiar la consola siempre que sea necesario. Es independiente del S.O.
 def borrar_pantalla():
     if os.name == "posix":
@@ -168,3 +367,4 @@ def main():
         opciones_menu(opcion, n, matriz_1, matriz_2, matriz_respuesta)
 
 main()
+
