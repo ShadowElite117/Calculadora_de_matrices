@@ -2,7 +2,6 @@ import numpy as np
 import os
 import Graficar_matrices
 
-<<<<<<< HEAD
 def Crear_contrasenia(user):
     def numero_primo(numero):
         if numero == 1:
@@ -200,14 +199,11 @@ def entrada_usuario():
         print ("Elija una de las opciones disponibles")
         solicitar_entrada_usuario()
 
-entrada_usuario()
-=======
 class Error(Exception):
     pass
 
 class DimensionNoEsMayorACero(Error):
     pass
->>>>>>> 2b348c46bdf40b53e708fa41f6b1841be3eedc36
 
 # Función para limpiar la consola siempre que sea necesario. Es independiente del S.O.
 def borrar_pantalla():
@@ -437,12 +433,13 @@ def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
         menor, mayor = numero_menor_mayor(matriz_2, dim_matriz_2, menor, mayor)
         print("El número menor es " + str(menor) + " y el número mayor es " + str(mayor) + "\n")
 
-    if opcion == 8:
+    # if opcion == 8:
         # Graficar_matrices.main(n, matriz_1, matriz_2)
 
 def main():
     operacion = 0
     while operacion != 9:
+        # entrada_usuario()
         dim_matriz_1 = dimensiones_matriz_1()
         print(dim_matriz_1)
         dim_matriz_2 = dimensiones_matriz_2()
@@ -457,4 +454,3 @@ def main():
         opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2)
 
 main()
-
