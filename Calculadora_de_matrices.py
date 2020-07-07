@@ -125,10 +125,13 @@ def llenar_matriz(dim_matriz, matriz):
     return matriz
 
 # Se suman las matrices 1 y 2, y se retorna la matriz respuesta.
-def suma_matrices(n, matriz_1, matriz_2, matriz_respuesta):
-    for i in range(n):
-        for j in range(n):
-            matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
+def suma_matrices(matriz_1, dim_matriz_1, matriz_2):
+    matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
+
+    for i in range(dim_matriz_1[0]):
+        for j in range(dim_matriz_1[0]):
+                matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
+
     return matriz_respuesta
 
 # Se restan las matrices 1 y 2 ó 2 y 1 dependiendo de la entrada dada por el usuario,
@@ -173,7 +176,10 @@ def numero_menor_mayor(n, matriz, menor, mayor):
 
 def opciones_menu(opcion, matriz_1, dim_matriz_1, matriz_2, dim_matriz_2):
     if opcion == 1:
-        print(suma_matrices(n, matriz_1, matriz_2, matriz_respuesta), "\n")
+        if dim_matriz_1 == dim_matriz_2:
+            print(suma_matrices(matriz_1, dim_matriz_1, matriz_2), "\n")
+        else:
+            print("Las matrices 1 y 2 no se pueden sumar porque sus dimensiones son diferentes.")
 
     if opcion == 2:
         print("1) Calcular matriz 1 - matriz 2")
