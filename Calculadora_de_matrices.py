@@ -326,7 +326,7 @@ def suma_matrices(matriz_1, dim_matriz_1, matriz_2):
     matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
 
     for i in range(dim_matriz_1[0]):
-        for j in range(dim_matriz_1[0]):
+        for j in range(dim_matriz_1[1]):
                 matriz_respuesta[i, j] = matriz_1[i, j] + matriz_2[i, j]
 
     return matriz_respuesta
@@ -337,7 +337,7 @@ def resta_matrices(matriz_1, dim_matriz_1, matriz_2):
     matriz_respuesta = np.zeros((dim_matriz_1[0], dim_matriz_1[1]))
 
     for i in range(dim_matriz_1[0]):
-        for j in range(dim_matriz_1[0]):
+        for j in range(dim_matriz_1[1]):
             matriz_respuesta[i, j] = matriz_1[i, j] - matriz_2[i, j]
 
     return matriz_respuesta
